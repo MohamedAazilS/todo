@@ -21,17 +21,17 @@ def task_list(req):
     else:
         tasks = ToDo.objects.all()
     return render(req, "task_list.html", {"tasks":tasks})
-
+@login_required
 def task_desc(req, id):
     task = ToDo.objects.get(id = id)
     return render(req, 'task_desc.html', {"task" : task})
-
+@login_required
 def task_delete(req, id):
     task = ToDo.objects.get(id = id)
     task.delete()
     tasks = ToDo.objects.all()
     return render(req,"task_list.html", {"tasks":tasks})
-
+@login_required
 def task_create(req):
     form = ToDoForm()
     if req.method == "POST":
@@ -47,7 +47,7 @@ def task_create(req):
             return HttpResponseRedirect(f"{task.id}")
         
     return render(req, "task_create.html", {"form" : form}) 
-
+@login_required
 def task_update(req, id):
     task = ToDo.objects.get(id = id)
     form = ToDoForm(instance=task)
@@ -104,4 +104,4 @@ def user_login(req):
 
 def user_logout(req):
     auth.logout(req)
-    return redirect("/login")
+    return redirect("/task/login")

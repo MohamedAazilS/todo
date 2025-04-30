@@ -10,7 +10,7 @@ urlpatterns = [
     path("<int:id>/update", task_update, name= "update"),
     path("register", register, name="register"),
     path("login", user_login, name="login"),
-    # path("logout", user_logout, name= "logout")
+    path("logout", user_logout, name= "logout")
 ]
 
 router = SimpleRouter()

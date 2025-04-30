@@ -6,10 +6,14 @@
 
 {% block content %}
     <div class="">
-        {{task.priority}}
-        {{task.status}}
+        <ul>
+            <li>Priority: {{task.priority}}</li>
+            <li>Status: {{task.status}}</li>
+            </ul>
     </div>
-    <button><a style="text-decoration: none;" href="{% url 'task_list' %}">Back</a></button>
-    <button><a style="text-decoration: none;" href="{% url 'delete' task.id %}">Delete</a></button>
-    <button><a style="text-decoration: none;" href="{% url 'update' task.id %}">Update</a></button>
+    <div class="" style="display:flex; justify-content: space-between;">
+    <a style="text-decoration: none;color: black;" href="{% url 'task_list' %}"><button style="width:10rem">Back</button></a>
+    <a style="text-decoration: none;color: black" href="{% url 'delete' task.id %}"><button style="width:10rem">Delete</button></a>
+    <a style="text-decoration: none;color: black" href="{% url 'update' task.id %}"><button style="width:10rem">Update</button></a>
+</div>
 {% endblock content %}

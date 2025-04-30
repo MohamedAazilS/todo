@@ -6,20 +6,26 @@
 
 {% block content %}
     <div class="">
-        <!-- <a href="{%url 'logout'%}"><button>Logout</button></a> -->
+        <a href="{%url 'logout'%}"><button>Logout</button></a>
         <a href="{% url 'create' %}">Create New Task</a>
         <form action="{% url 'task_list' %}" method="POST">
             {%csrf_token%}
             <select name="status" id="">
                 <option value="none" selected hidden>Select Status</option>
-                <option value="Completed">Completed</option>
                 <option value="Pending">Pending</option>
+                <option value="Completed">Completed</option>
                 <option value="Blocked">Blocked</option>
             </select>
             <button>Submit</button>
         </form>
         <h3>Number of Tasks : {{tasks.count}}</h3>
         <table>
+            <thead>
+                <th>Task ID</th>
+                <th>Name</th>
+                <th>Priority</th>
+                <th>Status</th>
+            </thead>
             {% for task in tasks %}
                 <tr>
                     <td><a href="{% url 'task_desc' task.id%}">{{task.id}}</a></td>
