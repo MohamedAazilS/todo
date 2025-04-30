@@ -28,10 +28,10 @@
             </thead>
             {% for task in tasks %}
                 <tr>
-                    <td><a href="{% url 'task_desc' task.id%}">{{task.id}}</a></td>
-                    <td><a href="{% url 'task_desc' task.id%}">{{task.name}}</a></td>
-                    <td><a href="{% url 'task_desc' task.id%}">{{task.priority}}</a></td>
-                    <td><a href="{% url 'task_desc' task.id%}">{{task.status}}</a></td>
+                    <td><a style="text-decoration: none;" href="{% url 'task_desc' task.id%}">{{task.id}}</a></td>
+                    <td><a style="text-decoration: none;" href="{% url 'task_desc' task.id%}">{{task.name}}</a></td>
+                    <td><a style="text-decoration: none;" href="{% url 'task_desc' task.id%}">{{task.priority}}</a></td>
+                    <td><a style="text-decoration: none;" href="{% url 'task_desc' task.id%}">{{task.status}}</a></td>
                 </tr>
             {% endfor %}
         </table>
