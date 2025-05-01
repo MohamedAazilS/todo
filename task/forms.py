@@ -7,7 +7,7 @@ from django.forms.widgets import PasswordInput, TextInput
 class ToDoForm(forms.ModelForm):
     class Meta:
         model = ToDo
-        fields = ("name", "desc", "priority", "status")
+        fields = ("name", "desc", "priority", "status", "user")
 
 class RegisterForm(UserCreationForm):
     class Meta:
