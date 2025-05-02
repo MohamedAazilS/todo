@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .models import ToDo, ToDoUser
-from .forms import ToDoForm, RegisterForm, LoginForm
+from .forms import ToDoForm, RegisterForm, LoginForm, ToDoUpdate
 from django.http import HttpResponseRedirect
 from rest_framework import viewsets
 from .serilizers import ToDOSerializer
@@ -58,14 +58,14 @@ def task_create(req):
 @login_required
 def task_update(req, id):
     task = ToDo.objects.get(id = id)
-    form = ToDoForm(instance=task)
+    form = ToDoUpdate(instance=task)
     if req.method == "POST":
-        form = ToDoForm(req.POST,instance=task)
+        form = ToDoUpdate(req.POST,instance=task)
         if form.is_valid():
             task.save()
             return render(req, "task_desc.html", {"task":task})
         else:
-            form = ToDoForm(instance=task)
+            form = ToDoUpdate(instance=task)
     return render(req, "task_create.html", {"form":form})
 
 
@@ -91,7 +91,7 @@ def register(req):
             reg_user.save()
             user = authenticate(req,username = form.cleaned_data['username'],password = form.cleaned_data['password1'])
             auth.login(req, user)
-            return redirect("/task")
+            return redirect("/")
     context = {"form":form}
     return render(req, "register.html", context)
 
@@ -99,7 +99,7 @@ def user_login(req):
     form = LoginForm()
     if req.method == "POST":
         form = LoginForm(req, data = req.POST)
-        if form.is_valid():
+        if form.is_valid() and req.POST.get('username') != "admin":
             username = req.POST.get("username")
             password = req.POST.get("password")
 
@@ -107,10 +107,10 @@ def user_login(req):
             
             if user is not None:
                 auth.login(req, user)
-                return redirect("/task")
+                return redirect("/")
 
     return render(req, "login.html", {"form":form})
 
 def user_logout(req):
     auth.logout(req)
-    return redirect("/task/login")
+    return redirect("/login")

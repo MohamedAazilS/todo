@@ -9,6 +9,7 @@ urlpatterns = [
     path("<int:id>/delete", task_delete, name= "delete"),
     path("<int:id>/update", task_update, name= "update"),
     path("register", register, name="register"),
+    path("accounts/login/", user_login, name="login"),
     path("login", user_login, name="login"),
     path("logout", user_logout, name= "logout")
 ]
